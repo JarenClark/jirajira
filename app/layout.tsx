@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-black text-gray-400 w-screen h-screen overflow-hidden">
-        <div className="flex flex-col">
+        <div className="flex flex-col p-2">
           <Header />
           <div className="flex w-screen">
             <Sidebar />

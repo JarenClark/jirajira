@@ -1,4 +1,5 @@
 import SidebarProjects from "./SidebarProjects";
+import DocumentFolderListing from "./DocumentFolderListing";
 import { Home, WorkflowIcon, BriefcaseIcon } from "lucide-react";
 import Link from "next/link";
 export const dynamic = "auto";
@@ -6,7 +7,7 @@ export const dynamic = "auto";
 type Props = { children?: React.ReactNode };
 export default async function Sidebar({ children }: Props) {
   return (
-    <div className="w-[256px] bg-white bg-opacity-5 rounded-xl m-2">
+    <div className="w-[256px] bg-white bg-opacity-10 rounded-xl m-2">
       {/* {children} */}
       <div className="p-4">
         <ul className="space-y-3 w-full">
@@ -26,8 +27,8 @@ export default async function Sidebar({ children }: Props) {
           </li>
         </ul>
       </div>
-
-      <SidebarProjects />
+      <DocumentFolderListing />
+      {/* <SidebarProjects /> */}
     </div>
   );
 }

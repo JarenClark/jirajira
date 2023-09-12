@@ -12,8 +12,8 @@ async function Header({}: Props) {
     data: { user },
   } = await supabase.auth.getUser();
   return (
-    <nav className="w-full flex justify-center m-2 bg-white bg-opacity-5 h-16">
-      <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm text-foreground">
+    <nav className="w-full flex justify-between m-2 bg-white bg-opacity-10 h-16">
+      <div className="w-full  flex justify-between items-center p-3 text-sm text-foreground">
         <div />
         <div>
           {user ? (

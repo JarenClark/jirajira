@@ -37,7 +37,7 @@ export default async function ProjectPage({
     }
   }
   return (
-    <div className="p-4 w-max bg-white m-2 bg-opacity-5">
+    <div className="p-4 w-max bg-white m-2 bg-opacity-10">
       <div className="rounded-lg m-2 px-2 py-2">
         <h1 className="text-3xl text-white">{project.title}</h1>
       </div>
