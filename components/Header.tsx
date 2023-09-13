@@ -11,27 +11,31 @@ async function Header({}: Props) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+//   const params = useParams()
   return (
-    <nav className="w-full flex justify-between m-2 bg-white bg-opacity-10 h-16">
-      <div className="w-full  flex justify-between items-center p-3 text-sm text-foreground">
-        <div />
-        <div>
-          {user ? (
-            <div className="flex items-center gap-4">
-              Hey, {user.email}!
-              <LogoutButton />
-            </div>
-          ) : (
-            <Link
-              href="/login"
-              className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
-            >
-              Login
-            </Link>
-          )}
+    <header className="px-2 pt-2 pb-1 ml-64 w-[calc(100vw - 256px)] ">
+      <nav className=" flex rounded-lg justify-between m-2 bg-slate-900 border border-slate-700 h-16">
+        <div className="w-full  flex justify-between items-center px-5 p-3 text-sm text-foreground">
+          {/* <pre>{JSON.stringify(params)}</pre> */}
+          <div />
+          <div>
+            {user ? (
+              <div className="flex items-center gap-4 ">
+                Hey, {user.email}!
+                <LogoutButton />
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="py-2 px-4 rounded-md no-underline bg-btn-background"
+              >
+                Login
+              </Link>
+            )}
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }
 

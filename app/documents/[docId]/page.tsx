@@ -8,6 +8,8 @@ import DocumentCollaborators from "@/components/DocumentCollaborators";
 import DocumentHeader from "@/components/DocumentHeader";
 import DocumentChat from "@/components/DocumentChat";
 import { Separator } from "@/components/ui/separator";
+import DocumentContent from "@/components/DocumentContent";
+import DocumentInfo from "@/components/DocumentInfo";
 type Props = {};
 
 export default async function DocumentPage({
@@ -25,27 +27,27 @@ export default async function DocumentPage({
     .single();
 
   return (
-    <div className="flex justify-between">
-      <div className="p-2 w-screen max-w-4xl">
-        <DocumentHeader
-          title={document.title}
-          description={document.description}
-        />
-
-        <ScrollArea className="h-[60vh]">
-          <div className="bg-white  bg-opacity-10 p-4 rounded-lg">
-            <div>
-              <p>Content for {params.docId}</p>
-            </div>
-            <div className="text-green-400">
-              <pre>{JSON.stringify(document, null, 2)}</pre>
-            </div>
+    <>
+      {document && document.title && document.description && (
+        <>
+          <div className="pt-8 pb-2 px-6">
+            <h1 className="text-2xl text-white font-semibold leading-none tracking-tight">
+              {document.title}
+            </h1>
           </div>
-        </ScrollArea>
-      </div>
-      <div className="w-screen max-w-md">
-        <DocumentChat />
-      </div>
-    </div>
+          <div className="flex justify-between  w-full">
+            <div className="p-2 space-y-4 w-3/5 min-w-4xl">
+              <ScrollArea className="h-[60vh]">
+                <DocumentContent docId={params.docId} />
+              </ScrollArea>
+            </div>
+            <aside className="p-2 space-y-4 w-2/5">
+              <DocumentInfo id={params.docId} />
+              <DocumentChat />
+            </aside>
+          </div>
+        </>
+      )}
+    </>
   );
 }

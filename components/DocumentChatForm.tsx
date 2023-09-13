@@ -1,6 +1,6 @@
 "use client";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -29,6 +29,7 @@ function DocumentChatForm({}: Props) {
   const params = useParams();
   const docId = params.docId;
 
+  // get our user (should extract this into a hook)
   useEffect(() => {
     const getUser = async () => {
       const authUser = await supabase.auth.getUser();
@@ -49,33 +50,54 @@ function DocumentChatForm({}: Props) {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
     console.log(docId, userId);
-    
-  }
 
+    const { data: msg, error } = await supabase
+      .from("_drive_comments")
+      .insert({
+        message: values.message,
+        user: userId,
+        doc: params.docId,
+      })
+      .select()
+      .single();
+
+    if (error) {
+      // do something
+    } else {
+      form.reset();
+    }
+    console.log(`msg is ${msg}`);
+    console.log(`error is ${JSON.stringify(error)}`);
+  }
+  const ref = useRef<any>(null);
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="flex items-end">
+        <div className="flex items-end w-full">
           <div>
             <FormField
               control={form.control}
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Message</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Message..."></Input>
+                    <Input
+                      {...field}
+                      className="min-w-[256px]"
+                      placeholder="Message..."
+                      ref={ref}
+                    ></Input>
                   </FormControl>
                 </FormItem>
               )}
             />
           </div>
-          <Button type="submit">Send</Button>
+          <Button className="ml-2 px-6" type="submit">Send</Button>
         </div>
       </form>
     </Form>

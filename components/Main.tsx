@@ -3,7 +3,7 @@ type Props = { children: React.ReactNode };
 
 function Main({ children }: Props) {
   return (
-    <main className="w-[calc(100vw - 256px)] min-h-screen bg-background text-gray-400 bg-black">
+    <main style={{width: 'calc(100vw - 256px)'}} className="ml-64 w-[calc(100vw - 256px)] px-2">
       {children}
     </main>
   );
