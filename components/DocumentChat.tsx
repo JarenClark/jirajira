@@ -14,34 +14,26 @@ import { useParams } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import DocumentChatForm from "@/components/DocumentChatForm";
 type Props = {
-  serverChats: any;
+  serverChats: { id: string; message: string; user: string; created_at: Date | string }[] | null;
+  currentUser: string | undefined | null;
 };
 
-function DocumentChat({ serverChats }: Props) {
+function DocumentChat({ currentUser,serverChats }: Props) {
+
   const supabase = createClientComponentClient();
   const params = useParams();
   const [chats, setChats] = useState<any[]>(serverChats ? serverChats : []);
-  const [userId, setUserId] = useState<any>(null);
 
-  // get our user (should extract this into a hook)
-  useEffect(() => {
-    const getUser = async () => {
-      const authUser = await supabase.auth.getUser();
-      console.log(`authUser is `, authUser);
-      if (authUser.data.user) {
-        setUserId(authUser.data.user.id);
-      }
-    };
-    getUser();
-  }, [supabase]);
-
-  // our initial chats (maybe fetch on server)
+  // our initial chats if server prop is empty array
   useEffect(() => {
     const getChats = async () => {
+      if (chats.length != 0) {
+        return null;
+      }
       console.log(`getting chats`);
       let { data: comments, error } = await supabase
         .from("_drive_comments")
-        .select("id,message, user ")
+        .select("id,message, user, created_at ")
         .eq("doc", params.docId);
       if (comments) {
         setChats(comments);
@@ -91,9 +83,9 @@ function DocumentChat({ serverChats }: Props) {
       <CardContent>
         <ScrollArea className="h-96 w-full border border-zinc-700 rounded-xl px-4">
           <ul className="space-y-2">
-            {chats.map((chat, i) => (
+            {chats.sort((a,b) => new Date(a.created_at) > new Date(b.created_at) ? 1 : -1).map((chat, i) => (
               <ChatMessage
-                currentUserId={userId}
+                currentUser={currentUser}
                 key={chat.id}
                 chat={chat}
                 showAvatar={avi(i)}
@@ -110,16 +102,16 @@ function DocumentChat({ serverChats }: Props) {
 }
 
 type ChatProps = {
-  currentUserId: string | null;
+  currentUser: string | undefined | null;
   showAvatar: boolean;
   chat: {
     message: string;
     user: string;
   };
 };
-function ChatMessage({ currentUserId, chat, showAvatar }: ChatProps) {
+function ChatMessage({ currentUser, chat, showAvatar }: ChatProps) {
   let classes = "w-48 rounded-t-lg p-2 text-sm ";
-  if (currentUserId == chat.user) {
+  if (currentUser == chat.user) {
     classes += " bg-blue-600 text-white ";
     if (showAvatar) {
       classes += " rounded-t-lg rounded-bl-lg ";
@@ -138,7 +130,7 @@ function ChatMessage({ currentUserId, chat, showAvatar }: ChatProps) {
     <li className="ref={latest}">
       <div
         className={`${
-          currentUserId == chat.user ? "flex-row-reverse" : ""
+          currentUser == chat.user ? "flex-row-reverse" : ""
         } flex items-end space-x-3 ${showAvatar && "mb-8"}`}
       >
         {showAvatar ? (

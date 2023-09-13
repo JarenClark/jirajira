@@ -26,6 +26,17 @@ export default async function DocumentPage({
     .eq("id", params.docId)
     .single();
 
+  // our initrial comments are fetched on the server
+  const { data: comments } = await supabase
+    .from("_drive_comments")
+    .select("id, message, user, created_at ")
+    .eq("doc", params.docId);
+  console.log(`comments are:`, comments);
+
+  // get our user for chats functionailty
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   return (
     <>
       {document && document.title && document.description && (
@@ -43,7 +54,7 @@ export default async function DocumentPage({
             </div>
             <aside className="p-2 space-y-4 w-2/5">
               <DocumentInfo id={params.docId} />
-              <DocumentChat />
+              <DocumentChat serverChats={comments} currentUser={user?.id} />
             </aside>
           </div>
         </>
