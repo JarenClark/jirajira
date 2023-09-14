@@ -13,13 +13,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useParams } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import DocumentChatForm from "@/components/DocumentChatForm";
+import UserAvatar from "./UserAvatar";
 type Props = {
-  serverChats: { id: string; message: string; user: string; created_at: Date | string }[] | null;
+  serverChats:
+    | { id: string; message: string; user: string; created_at: Date | string }[]
+    | null;
   currentUser: string | undefined | null;
 };
 
-function DocumentChat({ currentUser,serverChats }: Props) {
-
+function DocumentChat({ currentUser, serverChats }: Props) {
   const supabase = createClientComponentClient();
   const params = useParams();
   const [chats, setChats] = useState<any[]>(serverChats ? serverChats : []);
@@ -30,7 +32,7 @@ function DocumentChat({ currentUser,serverChats }: Props) {
       if (chats.length != 0) {
         return null;
       }
-      console.log(`getting chats`);
+      // console.log(`getting chats`);
       let { data: comments, error } = await supabase
         .from("_drive_comments")
         .select("id,message, user, created_at ")
@@ -64,7 +66,7 @@ function DocumentChat({ currentUser,serverChats }: Props) {
     };
   }, []);
 
-  // show avatar if end of chats or if next chat sender != current chat sender
+  // show avatar if end of chats or if current index sender does not equal next index sender
   const avi = (idx: number): boolean => {
     if (idx + 1 == chats.length) {
       return true;
@@ -77,20 +79,23 @@ function DocumentChat({ currentUser,serverChats }: Props) {
   return (
     <Card>
       <CardHeader>
-        {/* <CardTitle>Chat</CardTitle> */}
         <CardDescription>Chat</CardDescription>
       </CardHeader>
       <CardContent>
         <ScrollArea className="h-96 w-full border border-zinc-700 rounded-xl px-4">
-          <ul className="space-y-2">
-            {chats.sort((a,b) => new Date(a.created_at) > new Date(b.created_at) ? 1 : -1).map((chat, i) => (
-              <ChatMessage
-                currentUser={currentUser}
-                key={chat.id}
-                chat={chat}
-                showAvatar={avi(i)}
-              />
-            ))}
+          <ul className="space-y-2 py-4">
+            {chats
+              .sort((a, b) =>
+                new Date(a.created_at) > new Date(b.created_at) ? 1 : -1
+              )
+              .map((chat, i) => (
+                <ChatMessage
+                  currentUser={currentUser}
+                  key={chat.id}
+                  chat={chat}
+                  showAvatar={avi(i)}
+                />
+              ))}
           </ul>
         </ScrollArea>
       </CardContent>
@@ -119,7 +124,7 @@ function ChatMessage({ currentUser, chat, showAvatar }: ChatProps) {
       classes += " rounded-lg ";
     }
   } else {
-    classes += "  bg-gray-600 text-gray-400 ";
+    classes += "  bg-gray-600 text-gray-200 ";
     if (showAvatar) {
       classes += " rounded-t-lg rounded-br-lg ";
     } else {
@@ -135,15 +140,7 @@ function ChatMessage({ currentUser, chat, showAvatar }: ChatProps) {
       >
         {showAvatar ? (
           <div className="relative">
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            {/* {typeof chat.user != "string" && (
-              <div className="absolute top-full mt-2 left-0 text-gray-400 text-xs whitespace-nowrap ">
-                {chat.user.first_name} {chat.user.last_name.slice(0, 1)}.
-              </div>
-            )} */}
+            <UserAvatar userId={chat.user} />
           </div>
         ) : (
           <div className="w-10 h-10" />

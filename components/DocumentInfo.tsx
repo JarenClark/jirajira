@@ -7,19 +7,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import DocumentCollaborators from "./DocumentCollaborators";
+import DocumentCollaborators from "@/components/DocumentCollaborators";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-type Props = { id: String };
+import { Label } from "@/components/ui/label";
+type Props = { desc: String };
 
-function DocumentInfo({ id }: Props) {
+function DocumentInfo({ desc }: Props) {
   const supabase = createServerComponentClient({ cookies });
   return (
     <Card>
-      <CardHeader>
+      {/* <CardHeader>
         <CardDescription>About</CardDescription>
-      </CardHeader>
+      </CardHeader> */}
       <CardContent>
+        <div className="h-8"></div>
+        <Label>About</Label>
+        <p className="mt-2 mb-4 text-gray-400">{desc} </p>
         <DocumentCollaborators />
       </CardContent>
     </Card>

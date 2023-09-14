@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useParams } from "next/navigation";
 import { Label } from "@/components/ui/label";
+import UserAvatar from "@/components/UserAvatar";
 
 function DocumentCollaborators() {
   const [collaborators, setCollaborators] = useState<any[]>([]);
@@ -15,7 +16,7 @@ function DocumentCollaborators() {
     const getCollaborators = async () => {
       const { data: people, error } = await supabase
         .from("_drive_collaborators")
-        .select("id, online, user(first_name,last_name)")
+        .select("id, online, user(id, first_name,last_name)")
         .eq("document", params.docId);
 
       console.log("error", error);
@@ -26,23 +27,17 @@ function DocumentCollaborators() {
     getCollaborators();
   }, [supabase]);
 
+  if (!collaborators) {
+    return null;
+  }
   return (
     <>
       <div className="my-4">
         <Label>Collaborators</Label>
-        <ul className="flex text-gray-400">
+        <ul className="mt-2 flex text-gray-400">
           {collaborators.map((person) => (
             <li key={person.id} className="relative group">
-              <Avatar>
-                <AvatarImage
-                  src="https://github.com/shadcn.png"
-                  alt="@shadcn"
-                />
-                <AvatarFallback>
-                  {person.user.first_name.slice(0, 1)}
-                  {person.user.last_name.slice(0, 1)}
-                </AvatarFallback>
-              </Avatar>
+              <UserAvatar userId={person.user.id} />
               <div className="hidden group-hover:block absolute top-full mt-2 left-0 text-gray-400 text-xs whitespace-nowrap ">
                 {person.user.first_name} {person.user.last_name.slice(0, 1)}.
               </div>

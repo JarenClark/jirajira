@@ -35,13 +35,13 @@ export default async function Sidebar({ children }: Props) {
                   </span>
                 </Link>
               </li>
-              <li className="flex space-x-2">
+              {/* <li className="flex space-x-2">
                 <Link href={"/"}>
                   <span className="flex space-x-2 items-center ">
                     <BriefcaseIcon className="w-4 h-4" /> <span>My Work</span>
                   </span>
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <DocumentFolderListing />

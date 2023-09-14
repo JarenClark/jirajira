@@ -26,12 +26,11 @@ export default async function DocumentPage({
     .eq("id", params.docId)
     .single();
 
-  // our initrial comments are fetched on the server
+  // our initial comments are fetched on the server
   const { data: comments } = await supabase
     .from("_drive_comments")
     .select("id, message, user, created_at ")
     .eq("doc", params.docId);
-  console.log(`comments are:`, comments);
 
   // get our user for chats functionailty
   const {
@@ -41,19 +40,17 @@ export default async function DocumentPage({
     <>
       {document && document.title && document.description && (
         <>
-          <div className="pt-8 pb-2 px-6">
+          <div className="pt-8 pb-2 px-6 h-[10vh] flex items-end">
             <h1 className="text-2xl text-white font-semibold leading-none tracking-tight">
               {document.title}
             </h1>
           </div>
-          <div className="flex justify-between  w-full">
-            <div className="p-2 space-y-4 w-3/5 min-w-4xl">
-              <ScrollArea className="h-[60vh]">
-                <DocumentContent docId={params.docId} />
-              </ScrollArea>
+          <div className="grid w-full grid-cols-5 my-4 gap-2">
+            <div className="col-span-3">
+              <DocumentContent docId={params.docId} />
             </div>
-            <aside className="p-2 space-y-4 w-2/5">
-              <DocumentInfo id={params.docId} />
+            <aside className="col-span-2 space-y-3">
+              <DocumentInfo desc={document.description} />
               <DocumentChat serverChats={comments} currentUser={user?.id} />
             </aside>
           </div>
