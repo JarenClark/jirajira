@@ -115,16 +115,16 @@ type ChatProps = {
   };
 };
 function ChatMessage({ currentUser, chat, showAvatar }: ChatProps) {
-  let classes = "w-48 rounded-t-lg p-2 text-sm ";
+  let classes = "w-48 mr-4 rounded-t-lg p-2 text-sm";
   if (currentUser == chat.user) {
-    classes += " bg-blue-600 text-white ";
+    classes += " bg-blue-600 text-white mr-4";
     if (showAvatar) {
       classes += " rounded-t-lg rounded-bl-lg ";
     } else {
       classes += " rounded-lg ";
     }
   } else {
-    classes += "  bg-gray-600 text-gray-200 ";
+    classes += "  bg-green-700 text-white ";
     if (showAvatar) {
       classes += " rounded-t-lg rounded-br-lg ";
     } else {
@@ -132,14 +132,14 @@ function ChatMessage({ currentUser, chat, showAvatar }: ChatProps) {
     }
   }
   return (
-    <li className="ref={latest}">
+    <li className="">
       <div
         className={`${
-          currentUser == chat.user ? "flex-row-reverse" : ""
+          currentUser == chat.user ? "flex-row-reverse " : ""
         } flex items-end space-x-3 ${showAvatar && "mb-8"}`}
       >
         {showAvatar ? (
-          <div className="relative">
+          <div className="relative ">
             <UserAvatar userId={chat.user} />
           </div>
         ) : (

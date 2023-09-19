@@ -2,6 +2,8 @@ import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster"
+
 
 export const metadata = {
   title: "Project Manager",
@@ -23,6 +25,7 @@ export default function RootLayout({
               {children}
               </Main>
           </div>
+          <Toaster />
         </div>
       </body>
     </html>
