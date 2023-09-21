@@ -14,16 +14,10 @@ type Props = { docId: string };
 function DocumentContent({ docId }: Props) {
   return (
     <>
-      <Card className="h-[80vh]">
-        <CardHeader>
-          {/* <CardTitle>Chat</CardTitle> */}
-          <div className="flex justify-end">
-            <EditIcon className="w-4 h-4 text-gray-500 hover:text-white" />
-          </div>
-          {/* <CardDescription>Content</CardDescription> */}
-        </CardHeader>
+      <Card className="h-[80vh] border-0">
+
         <CardContent>
-          <ScrollArea className="h-[60vh]">
+          {/* <ScrollArea className="h-[60vh]"> */}
             {[...Array(6)].map((item, i) => (
               <p key={i} className="text-gray-400 mb-8">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -36,7 +30,7 @@ function DocumentContent({ docId }: Props) {
                 at? Repudiandae inventore ullam sapiente?
               </p>
             ))}
-          </ScrollArea>
+          {/* </ScrollArea> */}
         </CardContent>
         <CardFooter></CardFooter>
       </Card>

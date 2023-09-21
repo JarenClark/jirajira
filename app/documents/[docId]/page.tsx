@@ -10,6 +10,7 @@ import DocumentChat from "@/components/DocumentChat";
 import { Separator } from "@/components/ui/separator";
 import DocumentContent from "@/components/DocumentContent";
 import DocumentInfo from "@/components/DocumentInfo";
+import { EditIcon } from "lucide-react";
 type Props = {};
 
 export default async function DocumentPage({
@@ -40,17 +41,23 @@ export default async function DocumentPage({
     <>
       {document && document.title && document.description && (
         <>
-          <div className="pt-8 pb-2 px-6 h-[10vh] flex items-end">
-            <h1 className="text-2xl text-white font-semibold leading-none tracking-tight">
-              {document.title}
-            </h1>
-          </div>
-          <div className="grid w-full grid-cols-5 my-4 gap-2">
-            <div className="col-span-3">
-              <DocumentContent docId={params.docId} />
+          <div className="grid w-full grid-cols-5 gap-2">
+            <div className="col-span-3 ">
+              <ScrollArea className="h-[80vh]">
+                <div className="flex items-center min-h-[10vh]">
+                  <h1 className="text-4xl mx-4 text-gray-200 font-semibold leading-none tracking-tight">
+                    {document.title}
+                  </h1>
+                </div>
+
+                <div className="mb-4 px-6 text-gray-600 max-w-lg">
+                  {document.description}
+                </div>
+                <DocumentContent docId={params.docId} />
+              </ScrollArea>
             </div>
-            <aside className="col-span-2 space-y-3">
-              <DocumentInfo desc={document.description} />
+            <aside className=" border-l border-zinc-800  pl-4 col-span-2 space-y-3 min-h-[90vh]">
+              {/* <DocumentInfo desc={document.description} /> */}
               <DocumentChat serverChats={comments} currentUser={user?.id} />
             </aside>
           </div>

@@ -2,7 +2,12 @@ import React from "react";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import DocumentFolder from "./DocumentFolder";
-
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 export default async function DocumentFolderListing() {
   const supabase = createServerComponentClient({ cookies });
 
@@ -12,11 +17,11 @@ export default async function DocumentFolderListing() {
   return (
     <div>
       {folders && folders.length > 0 ? (
-        <ul className="px-4">
+        <Accordion type="multiple"  className="w-full">
           {folders?.map((folder) => (
             <DocumentFolder id={folder.id} key={folder.id} />
           ))}
-        </ul>
+        </Accordion>
       ) : null}
     </div>
   );

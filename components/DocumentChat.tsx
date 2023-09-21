@@ -13,7 +13,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useParams } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import DocumentChatForm from "@/components/DocumentChatForm";
-import UserAvatar from "./UserAvatar";
+import UserAvatar from "@/components/UserAvatar";
+import UserName from "@/components/UserName";
+import { Label } from "@/components/ui/label";
 type Props = {
   serverChats:
     | { id: string; message: string; user: string; created_at: Date | string }[]
@@ -66,6 +68,24 @@ function DocumentChat({ currentUser, serverChats }: Props) {
     };
   }, []);
 
+  // show username if end of chats or if current index sender does not equal next index sender
+  const name = (idx: number): boolean => {
+    // if its you
+    if (chats[idx].user == currentUser) {
+      return false;
+    }
+    // if its the first
+    if (idx == 0) {
+      return true;
+    }
+    // if its not the first but it is a new person speaking
+    if (chats[idx].user != chats[idx - 1].user) {
+      return true;
+    }
+    // default do not show
+    return false;
+  };
+
   // show avatar if end of chats or if current index sender does not equal next index sender
   const avi = (idx: number): boolean => {
     if (idx + 1 == chats.length) {
@@ -77,9 +97,9 @@ function DocumentChat({ currentUser, serverChats }: Props) {
     return false;
   };
   return (
-    <Card>
+    <Card className="w-[400px]">
       <CardHeader>
-        <CardDescription>Chat</CardDescription>
+        <CardDescription>Comments</CardDescription>
       </CardHeader>
       <CardContent>
         <ScrollArea className="h-96 w-full border border-zinc-700 rounded-xl px-4">
@@ -94,6 +114,7 @@ function DocumentChat({ currentUser, serverChats }: Props) {
                   key={chat.id}
                   chat={chat}
                   showAvatar={avi(i)}
+                  showName={name(i)}
                 />
               ))}
           </ul>
@@ -109,43 +130,46 @@ function DocumentChat({ currentUser, serverChats }: Props) {
 type ChatProps = {
   currentUser: string | undefined | null;
   showAvatar: boolean;
+  showName: boolean;
   chat: {
     message: string;
     user: string;
   };
 };
-function ChatMessage({ currentUser, chat, showAvatar }: ChatProps) {
-  let classes = "w-48 mr-4 rounded-t-lg p-2 text-sm";
+function ChatMessage({ currentUser, chat, showAvatar, showName }: ChatProps) {
+  let classes = "w-48 mr-4 rounded-lg p-2 text-sm";
   if (currentUser == chat.user) {
-    classes += " bg-blue-600 text-white mr-4";
-    if (showAvatar) {
-      classes += " rounded-t-lg rounded-bl-lg ";
-    } else {
-      classes += " rounded-lg ";
-    }
+    classes += " bg-blue-700 text-gray-200 mr-4";
+    // if (showName) {
+    //   classes += " rounded-t-lg rounded-bl-lg ";
+    // } else {
+    //   classes += " rounded-lg ";
+    // }
   } else {
-    classes += "  bg-green-700 text-white ";
-    if (showAvatar) {
-      classes += " rounded-t-lg rounded-br-lg ";
-    } else {
-      classes += " rounded-lg ";
-    }
+    classes += "  bg-gray-800 text-gray-200 ";
+    // if (showName) {
+    //   classes += " rounded-t-lg rounded-br-lg ";
+    // } else {
+    //   classes += " rounded-lg ";
+    // }
   }
   return (
     <li className="">
       <div
         className={`${
           currentUser == chat.user ? "flex-row-reverse " : ""
-        } flex items-end space-x-3 ${showAvatar && "mb-8"}`}
+        } flex items-end space-x-3 `}
       >
-        {showAvatar ? (
-          <div className="relative ">
-            <UserAvatar userId={chat.user} />
-          </div>
-        ) : (
-          <div className="w-10 h-10" />
-        )}
-        <div className={classes}>{chat.message}</div>
+        <div>
+          {showName && (
+            <div className="px-2">
+              <Label>
+                <UserName userId={chat.user} />
+              </Label>
+            </div>
+          )}
+          <div className={classes}>{chat.message}</div>
+        </div>
       </div>
     </li>
   );

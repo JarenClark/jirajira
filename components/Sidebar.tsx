@@ -25,38 +25,30 @@ export default async function Sidebar({ children }: Props) {
   return (
     <aside
       id="sidebar"
-      className="fixd left-0 top-0 z-40 h-screen w-64 transition-transform flex flex-col justify-between"
+      className="fixd left-0 top-0 z-40 h-[90vh] w-64 transition-transform flex flex-col justify-between"
       aria-label="Sidebar"
     >
       {" "}
-      <ScrollArea className="h-screen  w-64 border-r bg-zinc-950 border-zinc-700">
-        <div className="flex h-screen flex-col justify-between px-3 py-4">
+      <ScrollArea className="h-[90vh]  w-64 border-r  border-zinc-800">
+        <div className="flex h-[90vh] flex-col justify-between px-3 py-4">
           {/* {children} */}
           <div className="p-4">
-            <ul className="space-y-3 w-full">
+            <ul className=" flex flex-col space-y-6 w-full divide-y divide-zinc-800">
               <li className="block rounded-md">
                 <Link href={"/"}>
                   <span className="flex space-x-2 items-center ">
-                    <Home className="w-4 h-4" /> <span>Home</span>
+                    <Home className="w-6 h-6" /> <span>Home</span>
                   </span>
                 </Link>
               </li>
-              <li className="flex space-x-2">
+              <li className="">
                 <Link href={"/documents"}>
-                  <span className="flex space-x-2 items-center ">
-                    <FilesIcon className="w-4 h-4" /> <span>Documents</span>
-                  </span>
+                <span className="text-zinc-600">Resources</span>
                 </Link>
+                <DocumentFolderListing />
               </li>
-              {/* <li className="flex space-x-2">
-                <Link href={"/"}>
-                  <span className="flex space-x-2 items-center ">
-                    <BriefcaseIcon className="w-4 h-4" /> <span>My Work</span>
-                  </span>
-                </Link>
-              </li> */}
             </ul>
-            <DocumentFolderListing />
+
           </div>
           <div className="p-4"></div>
 

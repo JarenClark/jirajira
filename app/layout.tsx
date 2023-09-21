@@ -16,10 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-slate-950 text-gray-400 w-screen h-screen overflow-hidden">
+      <body className="bg-black text-gray-400 w-screen h-screen overflow-hidden">
         <div className="relative">
-          {/* <Header /> */}
-          <div className="flex w-screen">
+          <Header />
+          <div className="flex w-screen max-w-[1536px] mx-auto">
             <Sidebar />
             <Main>
               {children}

@@ -88,7 +88,7 @@ function DocumentChatForm({}: Props) {
                   <FormControl>
                     <Input
                       {...field}
-                      className="min-w-[256px]"
+                      className="min-w-[256px] bg-black"
                       placeholder="Message..."
                       ref={ref}
                     ></Input>
@@ -97,7 +97,7 @@ function DocumentChatForm({}: Props) {
               )}
             />
           </div>
-          <Button className="ml-2 px-6" type="submit">Send</Button>
+          <Button className="ml-2 px-6 bg-gray-800" type="submit">Send</Button>
         </div>
       </form>
     </Form>

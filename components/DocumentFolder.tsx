@@ -3,10 +3,16 @@ import React from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 // import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
-
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { useEffect, useState } from "react";
 import { ChevronDown, FolderKanbanIcon, MinusIcon } from "lucide-react";
 import Link from "next/link";
+import slugify from "slugify";
 type Props = { id: string };
 
 function DocumentFolder({ id }: Props) {
@@ -24,7 +30,7 @@ function DocumentFolder({ id }: Props) {
         .eq("id", id)
         .single();
 
-    //   console.log("error", error);
+      //   console.log("error", error);
       if (folder) {
         setFolder(folder);
       }
@@ -41,7 +47,7 @@ function DocumentFolder({ id }: Props) {
         .select("id,title")
         .eq("folder", id);
 
-    //   console.log("error", error);
+      //   console.log("error", error);
       if (documents) {
         setDocs(documents);
       }
@@ -51,26 +57,20 @@ function DocumentFolder({ id }: Props) {
   }, [supabase, setDocs]);
 
   return (
-    <li>
-      <div
-        className="flex space-x-1 items-center"
-        onClick={() => setFolderIsOpen(!folderIsOpen)}
-      >
-        <div
-          className={`${
-            folderIsOpen ? "" : "-rotate-90"
-          } block transform transititon duration-300`}
-        >
-          <ChevronDown className="w-4 h-4" />
-        </div>
-        <h3>{folder?.title}</h3>
-      </div>
-      <ul className="px-4">
-        {docs.map((doc) => (
-          <DocumentListItem key={doc.id} id={doc.id} title={doc.title} />
-        ))}
-      </ul>
-    </li>
+    <>
+      {folder && folder.title && (
+        <AccordionItem className="border-b border-zinc-800" value={slugify(folder.title)}>
+          <AccordionTrigger className="text-left">{folder?.title}</AccordionTrigger>
+          <AccordionContent >
+            <ul className="ml-2 pl-2 border-l border-zinc-800">
+              {docs.map((doc) => (
+                <DocumentListItem key={doc.id} id={doc.id} title={doc.title} />
+              ))}
+            </ul>
+          </AccordionContent>
+        </AccordionItem>
+      )}
+    </>
   );
 }
 type DocProps = { id: string; title: string };
@@ -78,13 +78,17 @@ type DocProps = { id: string; title: string };
 function DocumentListItem({ id, title }: DocProps) {
   const params = useParams();
   return (
-    <li className={`rounded-lg my-1 p-1 ${params.docId == id ? " bg-white bg-opacity-5 pointer-events-none" : ""}`}>
+    <li
+      className={`rounded-lg my-1 p-1 ${
+        params.docId == id ? " bg-white bg-opacity-10 pointer-events-none" : ""
+      }`}
+    >
       <Link href={`/documents/${id}`}>
         <div className="flex space-x-1">
-          <div className="w-4 mr-1 hidden">
+          {/* <div className="w-4 mr-1 hidden">
             <MinusIcon />
-          </div>
-          <h3 className="text-sm">{title} </h3>
+          </div> */}
+          <h3 className="">{title} </h3>
         </div>
       </Link>
       <div></div>
