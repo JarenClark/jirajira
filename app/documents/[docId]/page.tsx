@@ -11,6 +11,7 @@ import { Separator } from "@/components/ui/separator";
 import DocumentContent from "@/components/DocumentContent";
 import DocumentInfo from "@/components/DocumentInfo";
 import { EditIcon } from "lucide-react";
+import H1 from "@/components/ui/h1";
 type Props = {};
 
 export default async function DocumentPage({
@@ -41,13 +42,11 @@ export default async function DocumentPage({
     <>
       {document && document.title && document.description && (
         <>
-          <div className="grid w-full grid-cols-5 gap-2">
-            <div className="col-span-3 ">
+          <div className="grid w-full grid-cols-3 gap-2">
+            <div className="col-span-2 ">
               <ScrollArea className="h-[80vh]">
                 <div className="flex items-center min-h-[10vh]">
-                  <h1 className="text-4xl mx-4 text-gray-200 font-semibold leading-none tracking-tight">
-                    {document.title}
-                  </h1>
+                  <H1 text={document.title}></H1>
                 </div>
 
                 <div className="mb-4 px-6 text-gray-600 max-w-lg">
@@ -56,7 +55,7 @@ export default async function DocumentPage({
                 <DocumentContent docId={params.docId} />
               </ScrollArea>
             </div>
-            <aside className=" border-l border-zinc-800  pl-4 col-span-2 space-y-3 min-h-[90vh]">
+            <aside className=" border-l border-zinc-800  pl-4 col-span-1 space-y-3 min-h-[90vh]">
               {/* <DocumentInfo desc={document.description} /> */}
               <DocumentChat serverChats={comments} currentUser={user?.id} />
             </aside>

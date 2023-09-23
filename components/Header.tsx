@@ -13,8 +13,8 @@ async function Header({}: Props) {
   } = await supabase.auth.getUser();
 //   const params = useParams()
   return (
-    <header className="px-2 pt-2 pb-1 h-[10vh] ">
-      <nav className=" flex rounded-lg justify-between   border-b border-zinc-800 h-16">
+    <header className="px-2   ">
+      <nav className=" flex h-[10vh] rounded-lg justify-between   border-b border-zinc-800 h-16">
         <div className="w-full  flex justify-between items-center px-5 p-3 text-sm text-foreground">
           {/* <pre>{JSON.stringify(params)}</pre> */}
           <div />
