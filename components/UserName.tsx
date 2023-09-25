@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-
+import { Skeleton } from "@/components/ui/skeleton";
 type Props = {
   userId: string;
 };
@@ -25,13 +25,13 @@ function UserName({ userId }: Props) {
   }, [supabase]);
 
   if (!userProfile) {
-    return null;
+    return <Skeleton className="w-16 rounded-full h-4 " />;
   }
 
   return (
     <>
-      {userProfile.first_name}&nbsp;
-      {userProfile.last_name}
+        {userProfile.first_name}&nbsp;
+        {userProfile.last_name}
     </>
   );
 }

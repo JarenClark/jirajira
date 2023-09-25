@@ -12,10 +12,7 @@ export default async function TeamsOverviewPage({
 }) {
   return (
     <div>
-      <TeamHeader teamId={params.teamId} />
-      <div>
         <TeamTabs />
-      </div>
     </div>
   );
 }

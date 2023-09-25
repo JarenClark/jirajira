@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import {
   Card,
@@ -16,6 +16,7 @@ import DocumentChatForm from "@/components/DocumentChatForm";
 import UserAvatar from "@/components/UserAvatar";
 import UserName from "@/components/UserName";
 import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
 type Props = {
   serverChats:
     | { id: string; message: string; user: string; created_at: Date | string }[]
