@@ -45,10 +45,7 @@ export default async function DocumentPage({
           <div className="grid w-full grid-cols-3 gap-2">
             <div className="col-span-2 ">
               <ScrollArea className="h-[80vh]">
-                <div className="flex items-center min-h-[10vh]">
-                  <H1 text={document.title}></H1>
-                </div>
-
+                <DocumentHeader id={params.docId} title={document.title}/>
                 <div className="mb-4 px-6 text-gray-600 max-w-lg">
                   {document.description}
                 </div>

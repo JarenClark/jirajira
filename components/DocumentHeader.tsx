@@ -7,22 +7,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-type Props = { title: string; description: string };
+import H1 from "@/components/ui/h1";
+type Props = { title: string; id: string };
 
-function DocumentHeader({title, description}: Props) {
+function DocumentHeader({ title, id }: Props) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
-      {/* <CardContent>
-        <p>Card Content</p>
-      </CardContent>
-      <CardFooter>
-        <p>Card Footer</p>
-      </CardFooter> */}
-    </Card>
+    <div className="flex justify-between items-center min-h-[10vh]">
+      <H1 text={title} />
+    </div>
   );
 }
 
