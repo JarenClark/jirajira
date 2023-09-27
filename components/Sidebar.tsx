@@ -6,6 +6,8 @@ import {
   Home,
   WorkflowIcon,
   BriefcaseIcon,
+  MessageSquareIcon,
+  GaugeCircleIcon,
   UserCircleIcon,
   FilesIcon,
   UsersIcon,
@@ -32,8 +34,17 @@ export default async function Sidebar({ children }: Props) {
 
   // sidebar items
   const items = [
-    { link: "/", title: "Home", icon: <HomeIcon />, children: null },
+    {
+      link: "/",
+      title: "Dashboard",
+      icon: <GaugeCircleIcon />,
+      children: null,
+    },
     { link: "/", title: "Profile", icon: <UserCircleIcon />, children: null },
+
+    { link: "/", title: "Chat", icon: <MessageSquareIcon />, children: null },
+
+    // { link: "/", title: "Home", icon: <HomeIcon />, children: null },
 
     {
       link: "/teams/e5871dc6-8fac-4560-8141-23a52b9098ed",
@@ -42,11 +53,17 @@ export default async function Sidebar({ children }: Props) {
       children: null,
     },
     {
-      link: "/",
-      title: "Resources",
+      link: "/documents",
+      title: "Documents",
       icon: <FilesIcon />,
-      children: <DocumentFolderListing />,
+      children: null,
     },
+    // {
+    //   link: "/",
+    //   title: "Resources",
+    //   icon: <FilesIcon />,
+    //   children: <DocumentFolderListing />,
+    // },
   ];
 
   return (
@@ -72,8 +89,8 @@ export default async function Sidebar({ children }: Props) {
               ))}
             </ul>
           </div>
-          <div className="p-4">
-            <Button>LOGOUT</Button>
+          <div className="p-4 text-gray-400">
+            <Button>About</Button>
           </div>
         </div>
       </ScrollArea>

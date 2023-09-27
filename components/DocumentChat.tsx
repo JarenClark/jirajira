@@ -72,9 +72,9 @@ function DocumentChat({ currentUser, serverChats }: Props) {
   // show username if end of chats or if current index sender does not equal next index sender
   const name = (idx: number): boolean => {
     // if its you
-    if (chats[idx].user == currentUser) {
-      return false;
-    }
+    // if (chats[idx].user == currentUser) {
+    //   return false;
+    // }
     // if its the first
     if (idx == 0) {
       return true;
