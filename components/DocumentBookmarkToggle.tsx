@@ -2,9 +2,9 @@
 import { BookmarkIcon } from "lucide-react";
 import React from "react";
 
-type Props = {};
+type Props = { docId: string };
 
-function DocumentBookmarkToggle({}: Props) {
+function DocumentBookmarkToggle({ docId }: Props) {
   return (
     <>
       <BookmarkIcon />

@@ -42,19 +42,12 @@ export default async function DocumentPage({
     <>
       {document && document.title && document.description && (
         <>
-          <div className="grid w-full grid-cols-3 gap-2">
-            <div className="col-span-2 ">
-              <ScrollArea className="h-[80vh]">
-                <div className="mb-4 px-6 text-gray-600 max-w-lg">
-                  {document.description}
-                </div>
+          <div>
+            <div>
+              <ScrollArea className="h-[70vh] mt-[5vh]">
                 <DocumentContent docId={params.docId} />
               </ScrollArea>
             </div>
-            <aside className=" border-l border-zinc-800  pl-4 col-span-1 space-y-3 min-h-[90vh]">
-              {/* <DocumentInfo desc={document.description} /> */}
-              <DocumentChat serverChats={comments} currentUser={user?.id} />
-            </aside>
           </div>
         </>
       )}

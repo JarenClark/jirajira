@@ -1,17 +1,20 @@
 import React from "react";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 type Props = {
-  folderId: string;
   title: string;
 };
 
-export default async function DocumentBreadCrumbs({ folderId, title }: Props) {
-  const supabase = createServerComponentClient({ cookies });
-  const { data: document } = await supabase
-    .from("_drive_folders")
-    .select("title, id")
-    .eq("id", folderId)
-    .single();
-  return <div>DocumentBreadCrumbs</div>;
+export default async function DocumentBreadCrumbs({  title }: Props) {
+
+  return (
+    <div className="px-4 mt-4 mb-2 flex items-center space-x-1 text-zinc-600">
+      <Link href={"/documents"} className="hover:text-white">
+        Documents
+      </Link>
+      <ChevronRight className="w-5 h-5" />
+      <span>{title}</span>
+    </div>
+  );
 }

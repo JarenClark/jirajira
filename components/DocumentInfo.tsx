@@ -11,23 +11,31 @@ import DocumentCollaborators from "@/components/DocumentCollaborators";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Label } from "@/components/ui/label";
-type Props = { desc: String };
+import TeamBadge from "./TeamBadge";
+type Props = { docId: String };
 
-function DocumentInfo({ desc }: Props) {
+export default async function DocumentInfo({ docId }: Props) {
   const supabase = createServerComponentClient({ cookies });
+  const { data: document } = await supabase
+    .from("_drive_documents")
+    .select("description, team")
+    .eq("id", docId)
+    .single();
+
+  if (!document) return null;
   return (
     <Card>
       {/* <CardHeader>
         <CardDescription>About</CardDescription>
       </CardHeader> */}
       <CardContent>
-        <div className="h-8"></div>
-        <Label>About</Label>
-        <p className="mt-2 mb-4 text-gray-400">{desc} </p>
+        <div>
+          <TeamBadge teamId={document.team} />
+        </div>
+        <Label className="text-gray-600">About</Label>
+        <p className="mt-2 mb-4 text-gray-400">{document.description} </p>
         <DocumentCollaborators />
       </CardContent>
     </Card>
   );
 }
-
-export default DocumentInfo;

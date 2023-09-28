@@ -33,7 +33,7 @@ function DocumentCollaborators() {
   return (
     <>
       <div className="my-4">
-        <Label>Collaborators</Label>
+        <Label className="text-gray-600">Collaborators</Label>
         <ul className="mt-2 flex text-gray-400">
           {collaborators.map((person) => (
             <li key={person.id} className="relative group">
