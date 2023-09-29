@@ -32,14 +32,14 @@ export default async function DocumentHeader({ id }: Props) {
   const { title, folder } = document;
 
   return (
-    <div className="min-h-[10vh]">
-      <DocumentBreadCrumbs title={title} />
-      <div className="flex justify-between items-center mt-2 mb-4 w-screen max-w-3xl">
+    <>
+      {/* <DocumentBreadCrumbs title={title} /> */}
+      <div className="min-h-[10vh] flex justify-between items-center mt-4 mb-4 w-screen max-w-3xl">
         <H1 text={title} />
         <DocumentBookmarkToggle docId={id} />
       </div>
       <DocumentSubNav docId={id} />
-    </div>
+    </>
   );
 }
 

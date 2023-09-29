@@ -21,7 +21,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
+import TeamBadge from "@/components/TeamBadge";
+// import TeamLinkFromId from "@/components/TeamLinkFromId";
 export type Doc = {
   title: string;
   team: string;
@@ -36,16 +37,29 @@ export const columns: ColumnDef<Doc>[] = [
     cell: (value) => {
       const id = value.row.original.id;
       return (
-        <Link href={`/documents/${id}`}>{value.getValue() as string}</Link>
+        <Link href={`/documents/${id}`} className="block oy-2 hover:text-white">
+          {value.getValue() as string}
+        </Link>
       );
     },
   },
-  { accessorKey: "team", header: "Team" },
+  {
+    accessorKey: "team",
+    header: "Team",
+    cell: (value) => {
+      let val = value.getValue();
+      return (
+        <Link href={`/teams/${val as string}`}>
+          <TeamBadge teamId={val as string} />
+        </Link>
+      );
+    },
+  },
   { accessorKey: "id", header: "ID" },
   {
     accessorKey: "updated_at",
     header: "Updated At",
-    sortType: "datetime",
+    // sortType: "datetime",
     cell: (value) => {
       let val = value.getValue(),
         d = new Date(val as Date).toLocaleDateString("en-US", {

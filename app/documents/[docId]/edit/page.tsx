@@ -1,10 +1,5 @@
 import React from "react";
 import DocumentEdit from "@/components/DocumentEdit";
-// type Props = {
-//     params: {
-//         docId: string;
-//     }
-// }
 
 export default async function DocEditPage({
   params,

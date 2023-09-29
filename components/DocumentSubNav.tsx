@@ -18,7 +18,7 @@ type Props = { docId: string };
 function DocumentSubNav({ docId }: Props) {
   const currentPath = usePathname();
   const items = [
-    { title: `View`, href: `/documents/${docId}` },
+    { title: `Overview`, href: `/documents/${docId}` },
     { title: `Comments`, href: `/documents/${docId}/chat` },
     { title: `Edit`, href: `/documents/${docId}/edit` },
   ];
