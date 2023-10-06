@@ -19,7 +19,7 @@ function DocumentSubNav({ docId }: Props) {
   const currentPath = usePathname();
   const items = [
     { title: `Overview`, href: `/documents/${docId}` },
-    { title: `Comments`, href: `/documents/${docId}/chat` },
+    { title: `Discussion`, href: `/documents/${docId}/chat` },
     { title: `Edit`, href: `/documents/${docId}/edit` },
   ];
   return (

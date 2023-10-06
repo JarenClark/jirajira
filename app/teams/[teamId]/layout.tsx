@@ -1,4 +1,4 @@
-import TeamHeader from "@/components/TeamHeader";
+import TeamHeader from "@/components/team/TeamHeader";
 import React from "react";
 
 type Props = {

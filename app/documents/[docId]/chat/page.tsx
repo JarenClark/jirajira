@@ -1,7 +1,7 @@
 import React from "react";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import DocumentChat from "@/components/DocumentChat";
+import DocumentChat from "@/components/document/DocumentChat";
 type Props = {};
 
 export default async function DocumentChatPage({ params }: { params: { docId: string } }) {

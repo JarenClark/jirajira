@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/table";
 import H1 from "@/components/ui/h1";
 import Link from "next/link";
-import DocTable from "./components/DocTable";
+import DocTable from "@/components/document/DocTable";
 
 export default async function DocumentsPage() {
   const supabase = createServerComponentClient({ cookies });
@@ -23,7 +23,7 @@ export default async function DocumentsPage() {
   return (
     <div className="p-2 w-screen max-w-4xl">
       <div className="min-h-[10vh]">
-        <div className="flex justify-between items-center my-4 max-w-3xl">
+      <div className="min-h-[10vh] flex justify-between items-center w-screen max-w-3xl">
           <H1 text={"Documents"} />
         </div>
       </div>

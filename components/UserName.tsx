@@ -25,7 +25,7 @@ function UserName({ userId }: Props) {
   }, [supabase]);
 
   if (!userProfile) {
-    return <Skeleton className="w-16 rounded-full h-4 " />;
+    return <div className="w-16  h-4 " />;
   }
 
   return (

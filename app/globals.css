@@ -3,5 +3,23 @@
 @tailwind utilities;
 
 .text-muted-foreground {
-    color: hsl(240 5% 64.9%);
+  color: hsl(240 5% 64.9%);
+}
+
+/* .ql-editor {
+  height: 90vh;
+  max-height: 550px;
+  overflow: auto;
+} */
+.ql-toolbar,
+.ql-container {
+  border: 1px solid rgb(39 39 42)!important;
+}
+.ql-toolbar {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+.ql-container {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
 }

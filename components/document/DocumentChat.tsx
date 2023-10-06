@@ -12,7 +12,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useParams } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import DocumentChatForm from "@/components/DocumentChatForm";
+import DocumentChatForm from "@/components/document/DocumentChatForm";
 import UserAvatar from "@/components/UserAvatar";
 import UserName from "@/components/UserName";
 import { Label } from "@/components/ui/label";
@@ -98,7 +98,7 @@ function DocumentChat({ currentUser, serverChats }: Props) {
     return false;
   };
   return (
-    <Card className="w-[400px]">
+    <Card className="">
       <CardHeader>
         <CardDescription>Comments</CardDescription>
       </CardHeader>

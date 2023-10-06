@@ -34,7 +34,7 @@ export default async function DocumentHeader({ id }: Props) {
   return (
     <>
       {/* <DocumentBreadCrumbs title={title} /> */}
-      <div className="min-h-[10vh] flex justify-between items-center mt-4 mb-4 w-screen max-w-3xl">
+      <div className="min-h-[10vh] flex justify-between items-center w-screen max-w-3xl">
         <H1 text={title} />
         <DocumentBookmarkToggle docId={id} />
       </div>

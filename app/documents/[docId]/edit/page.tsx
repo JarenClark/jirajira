@@ -1,5 +1,5 @@
 import React from "react";
-import DocumentEdit from "@/components/DocumentEdit";
+import DocumentEdit from "@/components/document/DocumentEdit";
 
 export default async function DocEditPage({
   params,

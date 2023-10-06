@@ -1,7 +1,7 @@
 import SidebarProjects from "./SidebarProjects";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import DocumentFolderListing from "./DocumentFolderListing";
+// import DocumentFolderListing from "@/components/document/DocumentFolderListing";
 import {
   Home,
   WorkflowIcon,
@@ -42,7 +42,7 @@ export default async function Sidebar({ children }: Props) {
     },
     { link: "/", title: "Profile", icon: <UserCircleIcon />, children: null },
 
-    { link: "/", title: "Chat", icon: <MessageSquareIcon />, children: null },
+    //{ link: "/", title: "Chat", icon: <MessageSquareIcon />, children: null },
 
     // { link: "/", title: "Home", icon: <HomeIcon />, children: null },
 

@@ -1,13 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
+import Link from "next/link";
+
 type Props = {
   teamId: string;
 };
 
 export default function TeamBadge({ teamId }: Props) {
-  const [team, setTeam] = useState<any>({});
+  const [team, setTeam] = useState<any>(null);
 
   const supabase = createClientComponentClient();
 
@@ -21,13 +24,18 @@ export default function TeamBadge({ teamId }: Props) {
 
       console.log("error", error);
       if (team) {
-        setTeam(team);
+        // setTimeout(() => {
+          setTeam(team);
+        // }, 3000);
       }
     };
 
     getTeam();
   }, [supabase]);
-
-  if (!team) return null;
-  return <Badge>{team.title}</Badge>;
+  if (!team) return <Skeleton className="w-20 h-4 rounded-full" />;
+  return (
+    <Link href={`/teams/${teamId}`}>
+      <Badge>{team.title}</Badge>
+    </Link>
+  );
 }

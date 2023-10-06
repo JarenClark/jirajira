@@ -1,7 +1,7 @@
 import React from "react";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import H1 from "./ui/h1";
+import H1 from "@/components/ui/h1";
 import TeamJoinButton from "./TeamJoinButton";
 type Props = {
   teamId: string;
@@ -18,7 +18,7 @@ export default async function TeamHeader({ teamId }: Props) {
     return null;
   }
   return (
-    <div className="flex justify-between items-center min-h-[10vh]">
+    <div className="min-h-[10vh] flex justify-between items-center w-screen max-w-3xl">
       <H1 text={team.title} />
       <TeamJoinButton teamId={teamId} />
     </div>

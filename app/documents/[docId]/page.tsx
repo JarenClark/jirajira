@@ -4,12 +4,12 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import TaskGroup from "@/components/TaskGroup";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import DocumentCollaborators from "@/components/DocumentCollaborators";
-import DocumentHeader from "@/components/DocumentHeader";
-import DocumentChat from "@/components/DocumentChat";
+import DocumentCollaborators from "@/components/document/DocumentCollaborators";
+import DocumentHeader from "@/components/document/DocumentHeader";
+import DocumentChat from "@/components/document/DocumentChat";
 import { Separator } from "@/components/ui/separator";
-import DocumentContent from "@/components/DocumentContent";
-import DocumentInfo from "@/components/DocumentInfo";
+import DocumentContent from "@/components/document/DocumentContent";
+import DocumentInfo from "@/components/document/DocumentInfo";
 import { EditIcon } from "lucide-react";
 import H1 from "@/components/ui/h1";
 type Props = {};
@@ -44,9 +44,9 @@ export default async function DocumentPage({
         <>
           <div>
             <div>
-              <ScrollArea className="h-[70vh] mt-[5vh]">
+              {/* <ScrollArea className="h-[60vh]"> */}
                 <DocumentContent docId={params.docId} />
-              </ScrollArea>
+              {/* </ScrollArea> */}
             </div>
           </div>
         </>

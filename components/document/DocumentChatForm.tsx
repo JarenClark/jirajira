@@ -77,7 +77,7 @@ function DocumentChatForm({}: Props) {
   const ref = useRef<any>(null);
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
         <div className="flex items-end w-full">
           <div>
             <FormField
@@ -88,7 +88,7 @@ function DocumentChatForm({}: Props) {
                   <FormControl>
                     <Input
                       {...field}
-                      className="min-w-[256px] bg-black"
+                      className="min-w-[256px] w-full bg-black"
                       placeholder="Message..."
                       ref={ref}
                     ></Input>
