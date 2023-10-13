@@ -21,7 +21,7 @@ export default async function DocumentsPage() {
   // const { data: teams } = await supabase.from("_drive_teams").select("*");
 
   return (
-    <div className="p-2 w-screen max-w-4xl">
+    <div className=" w-screen max-w-4xl">
       <div className="min-h-[10vh]">
       <div className="min-h-[10vh] flex justify-between items-center w-screen max-w-3xl">
           <H1 text={"Documents"} />
